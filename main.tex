@@ -8,11 +8,24 @@
 
 \documentclass[a4paper]{article}
 \usepackage{hcr-cumcm}
+\usepackage[style=gb7714-2015,backend=biber]{biblatex}
+\addbibresource{bibdata.bib}
 \title{基于生物躯体水平形态的时间控制方法研究}
 
 \begin{document}
     \pagestyle{plain}
     \maketitle
 
+    %% ABSTRACT
     \input{sections/0-abstract.tex}
+    %% CONTENT
+    \input{sections/1-problem-statement.tex}
+    \input{sections/2-problem-analysis.tex}
+    \input{sections/3-modeling-assertions.tex}
+    \input{sections/4-math-symbols.tex}
+    \input{sections/5-modeling.tex}
+    \input{sections/6-validating.tex}
+    \input{sections/7-references.tex}
+    \input{sections/8-appendix.tex}
+    %% REFERENCES
 \end{document}
