@@ -2,7 +2,7 @@ PAPER    = main
 TEMPLATE = hcr-cumcm
 PDF      = $(PAPER).pdf
 REQUIRE  = $(PAPER).tex $(TEMPLATE).sty sections/*.tex
-TEMP     = *.aux sections/*.aux *.log *.out *.toc *.xdv *.synctex.gz
+TEMP     = *.aux sections/*.aux *.log *.out *.toc *.xdv *.bbl *.blg *.synctex.gz
 
 LATEX    = xelatex
 BIBER    = biber
