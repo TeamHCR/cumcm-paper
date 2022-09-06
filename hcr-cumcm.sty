@@ -17,7 +17,8 @@
 %% Packages Required
 \RequirePackage[hmargin=2.54cm,vmargin=3.17cm]{geometry}
 \RequirePackage[quiet]{fontspec}
-\RequirePackage{amsmath,amssymb}
+\RequirePackage[intlimits]{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
 \RequirePackage{tikz,pgfplots}
@@ -28,12 +29,18 @@
 \RequirePackage{graphicx}
 \RequirePackage{listings,color}
 \RequirePackage{siunitx}
+\RequirePackage{newtxtext}
+\RequirePackage[slantedGreek, upint]{newtxmath}
+\RequirePackage{hyperref}
+\RequirePackage{bookmark}
 
 %% Fonts & Style
-%%% Latin Fonts, use default
+%%% Latin Fonts, use NewTX
 %%% Chinese Fonts, use Hanyi fonts
 \setCJKmainfont{HYShuSongErS}[BoldFont=HYCuJianHeiJ, ItalicFont=HYKaiTiS, Mapping=quote-stop]
-% \setCJKmainfont{FZShuSong-Z01}[BoldFont=FZHei-B01, ItalicFont=FZFangSong-Z02, Mapping=fullwidth-stop]
+\xeCJKsetwidth{。？！}{0.9em}
+\xeCJKsetkern{」}{？}{1pt}
+\xeCJKsetkern{】}{。}{1pt}
 
 %% Title
 \renewcommand{\maketitle}{%
@@ -42,6 +49,15 @@
         \bfseries
         \@title
     \end{center}
+}
+
+%% Hyperref
+\AtBeginDocument {
+    \hypersetup{
+        pdftitle={\@title},%
+        hidelinks,%
+        bookmarksnumbered=true%
+    }
 }
 
 %% Code Verbatim Environment
@@ -67,7 +83,12 @@
 }
 
 %% Math Things
+%%% Use \dif to make roman d
 \newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+%%% Use \e to make roman e
+\newcommand*{\e}{\mathrm{e}}
+%%% Use \vecmat to make bold symbol
+\newcommand*{\vecmat}[1]{\boldsymbol{#1}}
 
 
 % END OF TEMPLATE
