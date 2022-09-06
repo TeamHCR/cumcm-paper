@@ -4,4 +4,6 @@
 *.xdv
 *.out
 *.toc
+*.bbl
+*.blg
 *.synctex.gz
