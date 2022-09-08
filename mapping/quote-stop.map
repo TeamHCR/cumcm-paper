@@ -1,0 +1,13 @@
+; TECkit mapping for conversion of `Right Angle Qutation Mark" to `Qutation Mark"
+;
+
+LHSName "Right Angle Qutation Mark & Ideographic Period"
+RHSName "Qutation Mark & Ideographic Full-Width Stop"
+
+pass(Unicode)
+
+U+3002 <> U+FF0E
+U+300C <> U+201C
+U+300D <> U+201D
+U+300E <> U+2018
+U+300F <> U+2019

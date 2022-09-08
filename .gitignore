@@ -6,4 +6,5 @@
 *.toc
 *.bbl
 *.blg
+*.bcf
 *.synctex.gz

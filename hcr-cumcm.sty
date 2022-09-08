@@ -16,7 +16,6 @@
 
 %% Packages Required
 \RequirePackage[hmargin=2.54cm,vmargin=3.17cm]{geometry}
-\RequirePackage[quiet]{fontspec}
 \RequirePackage[intlimits]{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{booktabs}
@@ -29,18 +28,16 @@
 \RequirePackage{graphicx}
 \RequirePackage{listings,color}
 \RequirePackage{siunitx}
-\RequirePackage{newtxtext}
-\RequirePackage[slantedGreek, upint]{newtxmath}
 \RequirePackage{hyperref}
 \RequirePackage{bookmark}
 
 %% Fonts & Style
 %%% Latin Fonts, use NewTX
 %%% Chinese Fonts, use Hanyi fonts
-\setCJKmainfont{HYShuSongErS}[BoldFont=HYCuJianHeiJ, ItalicFont=HYKaiTiS, Mapping=quote-stop]
+\setCJKmainfont[BoldFont=HYCuJianHeiJ,ItalicFont=HYKaiTiS,Mapping=quote-stop]{HYShuSongErS} 
 \xeCJKsetwidth{。？！}{0.9em}
-\xeCJKsetkern{」}{？}{1pt}
-\xeCJKsetkern{】}{。}{1pt}
+\RequirePackage{newtxtext}
+\RequirePackage[slantedGreek,upint]{newtxmath}
 
 %% Title
 \renewcommand{\maketitle}{%
@@ -51,9 +48,14 @@
     \end{center}
 }
 
+%% Appendix
+\ctexset{
+    appendix/name = {附录}
+}
+
 %% Hyperref
-\AtBeginDocument {
-    \hypersetup{
+\AtBeginDocument {%
+    \hypersetup{%
         pdftitle={\@title},%
         hidelinks,%
         bookmarksnumbered=true%
@@ -65,21 +67,21 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
-    language=Python,
-    aboveskip=3mm,
-    belowskip=3mm,
-    showstringspaces=false,
-    columns=flexible,
-    basicstyle={\small\ttfamily},
-    numbers=left,
-    numberstyle=\tiny\color{gray},
-    keywordstyle=\color{blue},
-    commentstyle=\color{dkgreen},
-    stringstyle=\color{mauve},
-    breaklines=true,
-    breakatwhitespace=true,
-    tabsize=4
+\lstset{frame=tb,%
+    language=Python,%
+    aboveskip=3mm,%
+    belowskip=3mm,%
+    showstringspaces=false,%
+    columns=flexible,%
+    basicstyle={\small\ttfamily},%
+    numbers=left,%
+    numberstyle=\tiny\color{gray},%
+    keywordstyle=\color{blue},%
+    commentstyle=\color{dkgreen},%
+    stringstyle=\color{mauve},%
+    breaklines=true,%
+    breakatwhitespace=true,%
+    tabsize=4%
 }
 
 %% Math Things
@@ -89,6 +91,5 @@
 \newcommand*{\e}{\mathrm{e}}
 %%% Use \vecmat to make bold symbol
 \newcommand*{\vecmat}[1]{\boldsymbol{#1}}
-
 
 % END OF TEMPLATE
