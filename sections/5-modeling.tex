@@ -1,3 +1,69 @@
 \section{模型建立与求解}
 
-略。
+\subsection{问题一}
+
+\subsubsection{模型的构建和分析}
+
+在开始之前，我们需要先构建整个装置的物理模型。
+
+当装置在水中静止时，对质量为 $m$ 的振子进行受力分析，以铅直向上为正方向，其受到的重力为 $-mg$，受到弹簧弹力为 $F_0$。
+容易知道这两个力合力为零。若记此时振子位移为 0，记此时弹簧压缩量为 $x_0$，弹簧的胡克系数为 $k$，则有 
+
+\begin{equation}
+    kx_0^2-mg=0 
+    \label{oscilator}
+\end{equation}
+
+考虑在 $t$ 时刻，浮子位移 $x_1$，振子位移 $x_2$。
+记阻尼器的阻尼系数为 $c$，则
+
+\begin{equation}
+    m\dfrac{\dif^2x_2}{\dif t^2}=k(x_1-x_2+x_0)+c(\dfrac{\dif{x_1}}{\dif{t}}-\dfrac{\dif{x_2}}{\dif{t}})-mg
+\end{equation}
+
+而在此时，对浮子进行受力分析，记海水的兴波阻尼系数为 $c_0$，附加质量为 $m_0$，浮子质量为 $M$，波浪激励力为 $F$，有 
+
+\begin{equation}
+    M\dfrac{\dif^2x_1}{\dif t^2}=F+F_\text{浮}-Mg-k(x_1-x_2+x_0)-c(\dfrac{\dif{x_1}}{\dif{t}}-\dfrac{\dif{x_2}}{\dif{t}})-c_0\dfrac{\dif{x_1}}{\dif{t}}-m_0\dfrac{\dif^2 x_1}{\dif x_1^2}
+\end{equation}
+
+我们需要确定起始时装置的深度。
+记装置静止时受到的总浮力为 $F_\text{浮总}$，水的密度为 $\rho$，装置在水中漂浮时排水体积为 $V_\text{排总}$，则有
+
+\begin{align}
+    & F_\text{浮总}=\rho gV_\text{排总} \\
+    & (m+M)g=F_\text{浮总}
+\end{align}
+
+代入附件 4 的数据容易求得 $V_\text{排总}\approx7.121\,\mathrm{m}^3$。
+另一方面，考虑浮子下方锥体的体积，有 $V_\text{锥}=\dfrac{1}3\uppi r^2h\approx0.837\,\mathrm{m}^3$。显然，水没过了整个锥体部分，水面在浮子的柱体部分。此时，浮子因在液面中上升下降所造成的浮力变化 $\Delta F_\text{浮}=\rho g\Delta V_{排}=\rho gA\Delta x_1$，其中 $\Delta x_1$ 为浮子没入液面深度的变化量，$A$ 是圆柱的横截面面积。
+从而有
+
+\begin{equation}
+    F_\text{浮}=F_\text{浮总}+\Delta F_\text{浮}=F_\text{浮总}-\rho gAx_1
+    \label{floating}
+\end{equation}
+
+联立 \eqref{oscilator}—\eqref{floating} 式，我们可以约去 $mg$、$Mg$、$F_\text{浮}$ 和 $x_0$ 几项，得到
+
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        &  m\dfrac{\dif^2x_2}{\dif t^2}=k(x_1-x_2)+c(\dfrac{\dif{x_1}}{\dif{t}}-\dfrac{\dif{x_2}}{\dif{t}}) \\
+        &  M\dfrac{\dif^2x_1}{\dif t^2}=F-k(x_1-x_2)-c(\dfrac{\dif{x_1}}{\dif{t}}-\dfrac{\dif{x_2}}{\dif{t}})-\rho gAx_1-c_0\dfrac{\dif{x_1}}{\dif{t}}-m_0\dfrac{\dif^2 x_1}{\dif t^2}
+    \end{aligned}
+    \right.
+    \label{chui-dang}
+\end{equation}
+
+式 \eqref{chui-dang} 就是关于浮子和振子垂荡运动的微分方程组。
+考虑装置启动前静止，$t=0$ 时，有初值
+
+\begin{equation}
+    \begin{aligned}
+        & x_1=x_2=0 \\
+        & \dfrac{\dif x_1}{\dif t}=\dfrac{\dif x_2}{\dif t}=0
+    \end{aligned}
+\end{equation}
+
+求解这个初值问题，我们就能解出此题。

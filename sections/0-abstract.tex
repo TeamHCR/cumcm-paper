@@ -1,20 +1,56 @@
 \section*{摘要}
 \addcontentsline{toc}{section}{摘要}
-随着化石矿物质能源的日益枯竭，人们将目光更多地投向了可再生能源。海洋
-中蕴含着巨大的波浪能，合理地开发和利用海洋波浪能已成为研究人员关注的焦点。其中，波浪能装置的能量转换效率是波浪能规模化利用的关键问题之一。
-本文主要研究一种由浮子、振子、中轴以及能量输出系统构成的波浪能装置，通过建立合理的数学模型，
-推算其浮子和振子在不同情况下的垂荡位移和速度，并确定该系统在考虑不同因素的情况下的最大输出功率及相应的最优阻尼系数。
+随着化石矿物质能源的日益枯竭，人们将目光更多地投向了可再生能源。
+近年来，海洋波浪能已成为研究人员关注的焦点。
+而在这其中，波浪能装置的能量转换效率是人们感兴趣的关键问题之一。
 
-\textbf{对于问题一}，
-我们通过对装置进行受力分析，列出微分方程，将微分方程通过机器求解得出题目中所求的五个时刻的浮子与振子的垂荡位移速度结果。
-方程求解的结果已经存放到result1-1.xlsx和result1-2.xlsx中。
+本文主要研究一种由浮子、振子等结构构成的波浪能装置，通过建立合理的数学模型，
+推算其浮子和振子在不同情况下的摇荡位移和速度，并确定该系统在考虑不同因素的情况下的最大输出功率及相应的最优阻尼系数。
 
+\textbf{对于问题一}，我们通过对装置进行受力分析，列出与浮子、振子的位移 $x_1$、$x_2$ 有关的微分方程组，数值求解得出题目中所求的各个时刻的浮子与振子的垂荡位移和速度。方程求解的结果已经存放到文件 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 中。
+其中，在两种不同情况下，5 个特定时刻的位移和速度如表 \ref{answer-1} 和表 \ref{answer-2} 所示：
+
+\begin{table}[htbp]
+    \centering
+    \scriptsize
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \begin{tabular}{ccccccc}
+            \toprule
+            & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
+            \midrule
+            \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+            \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+            \bottomrule
+        \end{tabular}
+    \caption{1(1) 中 5 个特殊点的位移和速度}
+    \label{answer-1}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \begin{tabular}{ccccccc}
+            \toprule
+            & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
+            \midrule
+            \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+            \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+            \bottomrule
+        \end{tabular}
+    \caption{1(2) 中 5 个特殊点的位移和速度}
+    \label{answer-2}
+    \end{minipage}
+\end{table}
 
 \textbf{对于问题二}，
 我们通过计算瞬时功率并将瞬时功率进行积分，根据公式求出平均功率，再利用梯度下降法对积分过程进行优化，
-得到所求的两种情况的最大输出功率及相应的最优阻尼系数。
+得到所求的两种情况的最大输出功率及相应的最优阻尼系数，分别为 (1) 100\,W, 0.1 和 (2) 200\,W, 0.2。
 
 \textbf{对于问题三}，
 
+\vfill
 
 \textbf{关键词}：波浪能发电 \hspace{1em} 摇荡运动 \hspace{1em}
