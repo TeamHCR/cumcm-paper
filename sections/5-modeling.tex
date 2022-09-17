@@ -217,9 +217,9 @@
     \label{answer-2-2}
 \end{table}
 
-\section{问题三}
+\subsection{问题三}
 
-\subsection{运动方程的建立}
+\subsubsection{运动方程的建立}
 
 与问题一相比，问题三加入了中轴的旋转，使得整个系统的运动变得复杂。
 我们有必要建立新的细化的物理模型，从而列出新的运动方程。
@@ -233,7 +233,7 @@
     \item 题目中所提供的波浪激励力矩 $L\cos(\omega t)$ 可视为力偶矩，它不为浮子的平动提供加速度。
 \end{enumerate}
 
-我们以整个装置静止直立在水面上时，浮子的质心为原点，以来流方向为 $x$ 轴正方向，以铅直向上为 $z$ 轴正方向，建立空间直角坐标系 $O-xyz$。
+我们以整个装置静止直立在水面上时，浮子的质心为原点，以来流指向方向为 $x$ 轴正方向，以铅直向上为 $z$ 轴正方向，建立空间直角坐标系 $O-xyz$。
 在装置运行的某一时刻，在 $xOz$ 投影面上装置的运行状态如图 \ref{status} 所示。
 \begin{figure}[htbp]
     \centering
@@ -256,12 +256,57 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 记 $F_{AB}$ 在 $x$ 和 $z$ 方向的分力分别为 $F_{ABx}$ 和 $F_{ABz}$。
 在 $x$ 和 $z$ 方向分别列出振子的运动学方程，有
 \begin{align}
-    m\cdot\dfrac{\dif^2 x_P}{\dif t^2} &= F_\text{PTO}\sin(\theta+\gamma)+F_{ABx} \\
+    m\cdot\dfrac{\dif^2 x_P}{\dif t^2} &= -F_\text{PTO}\sin(\theta+\gamma)+F_{ABx} \label{problem-3-eq1}\\
     m\cdot\dfrac{\dif^2 z_P}{\dif t^2} &= F_\text{PTO}\cos(\theta+\gamma)-mg+F_{ABz}
 \end{align}
 
 考虑振子的转动，设其在弹簧长度为 $l$ 时的转动惯量为 $I_B(l)$。
-记绞接处旋转阻尼器产生的旋转力矩为 $M_{PTO}$，则可以列出如下的转动运动学方程
+以逆时针为正方向。
+记绞接处旋转阻尼器产生的旋转力矩为 $M_\text{PTO}$，则可以列出如下的转动运动学方程
 \begin{equation}
-    I_B(l)\cdot\dfrac{\dif^2(\theta+\gamma)}{\dif t^2}=M_{PTO}-F_{ABx}\cdot l\cos(\alpha+\gamma)-F_{ABz}\cdot l\sin(\theta+\gamma)
+    I_B(l)\cdot\dfrac{\dif^2(\theta+\gamma)}{\dif t^2}=M_\text{PTO}-F_{ABx}\cdot l\cos(\alpha+\gamma)-F_{ABz}\cdot l\sin(\theta+\gamma)
 \end{equation}
+
+再来分析浮子。
+在水平方向，由前文的前提分析可知，浮子受到的合力为零。
+而在这一方向能产生分力的，只有 $F_{ABx}$ 和 $F_\text{PTO}$ 的反作用力。
+我们容易得到
+\begin{equation}
+    F_\text{PTO}\sin(\theta+\gamma)-F_{ABx}=0
+\end{equation}
+
+同时，在竖直方向，浮子受到波浪激励力 $F$、自身重力 $Mg$、PTO 反作用力 $F_\text{PTO}$ 的竖直分力、杆支持力的反作用力的水平竖直分力 $F_{ABy}$，以及浮力（静水恢复力） $F_\text{浮}$、附加惯性力 $m_0\dfrac{\dif^2z_G}{\dif t^2}$、兴波阻尼力 $c_0\dfrac{\dif z_G}{\dif t}$。
+因此有
+\begin{equation}
+    M\cdot\dfrac{\dif^2 z_G}{\dif t^2}=F+F_\text{浮}-Mg-F_\text{PTO}\cos(\theta+\gamma)-F_{ABy}-m_0\dfrac{\dif^2z_G}{\dif t^2}-c_0\dfrac{\dif z_G}{\dif t}
+\end{equation}
+
+最后，我们分析浮子的转动过程。
+记波浪激励力矩为 $M$，浮子绕过其质心的轴的转动惯量为 $I_A$，附加转动惯量为 $I_0$，兴波阻尼力矩系数为 $c_\text{rot}$，静水恢复力矩系数为 $M_\text{rec}$，有
+\begin{equation}
+    I_A\dfrac{\dif^2\theta}{\dif t^2}=M-M_\text{PTO}-F_{ABx}\cdot d\cos\theta-F_{ABz}\cdot d\sin\theta-I_0\dfrac{\dif^2\theta}{\dif t^2}-c_\text{rot}\dfrac{\dif\theta}{\dif t}-M_\text{rec}\theta \label{problem-3-eq6}
+\end{equation}
+
+式 \eqref{problem-3-eq1}—\eqref{problem-3-eq6} 构成一组微分方程组。
+我们对其中感兴趣的量是 $\theta$、$\gamma$、$l$ 和 $z_G$，它们都是时间 $t$ 的函数。
+下面，我们把上面方程中除了这 4 个函数以外的值全都进行转化，得到只与它们有关的一组方程。
+
+\subsubsection{因变量的求值}
+
+考虑弹簧和阻尼器构成的 PTO。
+容易知道
+\begin{equation}
+    F_\text{PTO}=-k(l-l_0)-c\dfrac{\dif l}{\dif t}
+\end{equation}
+
+考虑转轴绞接处的旋转 PTO，记扭转弹簧的刚度系数为 $k_\text{rot}$，旋转阻尼器的阻尼系数为 $c_\text{rot}$，有
+\begin{equation}
+    M_\text{PTO}=-k_\text{rot}\gamma-c_\text{rot}\dfrac{\dif \gamma}{\dif t}
+\end{equation}
+
+考虑几何关系，有
+\begin{align}
+    x_P&=d\sin\theta-l\sin(\theta+\gamma) \\
+    z_P&=z_G-d\cos\theta+l\cos(\theta+\gamma)
+\end{align}
+
