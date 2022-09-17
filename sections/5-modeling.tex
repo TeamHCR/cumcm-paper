@@ -5,6 +5,7 @@
 \subsubsection{模型的构建和分析}
 
 在开始之前，我们需要先构建整个装置的物理模型。
+以海平面为参考系。
 
 当装置在水中静止时，对质量为 $m$ 的振子进行受力分析，则其受到的重力和受到弹簧弹力合力为零。
 记以铅直向上为正方向，重力加速度为 $g$，记此时振子位移为 0，记此时弹簧压缩量为 $x_0$，弹簧的刚度为 $k$，则有 
@@ -106,7 +107,7 @@
     c=\left\{
         \begin{aligned}
             & \N{10000}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}, \text{对于情况 1} \\
-            & \N{10000}\sqrt{\left|\dfrac{\dif x_1}{\dif t}-\dfrac{\dif x_2}{\dif t}\right|}\,\mathrm{N}\cdot(\frac{\mathrm{s}}{\mathrm{m}})^\dfrac{3}{2}, \text{对于情况 2}
+            & \N{10000}\sqrt{\left|\dfrac{\dif x_1}{\dif t}-\dfrac{\dif x_2}{\dif t}\right|}\,\mathrm{N}\cdot(\mathrm{s}/\mathrm{m})^{3/2}, \text{对于情况 2}
         \end{aligned}
     \right.
 \end{equation}
@@ -115,3 +116,24 @@
 对于题设的两种情况，我们均设定求解起点和终点为 0\,s 和 180\,s，以 0.2\,s 为间隔进行求解，得到在这 180\,s（即前 40 个周期）中，振子和浮子各自的位移和速度，如图所示。
 
 完整的求解结果，我们已经存放在 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 文件中。其中，10\,s，20\,s，40\,s，60\,s，100\,s 时的数据如表所示。
+
+\subsection{问题二}
+
+\subsubsection{输出功率的推导}
+
+波浪能系统的输出功率来自于 PTO 的阻尼力做功。
+在 $t$ 时刻，设 PTO 的阻尼力为 $F_\text{PTO}$，记瞬时输出功率为 $P(t)$，则
+    \begin{align}
+        & F_\text{PTO}=c|v_1-v_2| \\
+        & P(t)=F_\text{PTO}\Delta v=c(v_1-v_2)^2
+    \end{align}
+其中 $v_1$、$v_2$ 是浮子和振子的速度。
+得到瞬时功率之后，将其在一段时间内累加（积分）并取平均值，即可得到平均输出功率
+\begin{equation}
+    \bar{P}=\dfrac{1}{T}\int\limits_0^TP(t)\dif t\approx\dfrac{1}{T}\sum_{i=1}^n\dfrac{P(t_i)+P(t_{i+1})}{2}\Delta t
+\end{equation}
+结合问题一计算得到的离散速度、位移与时间的关系，我们容易算出给定条件下的 PTO 输出功率。
+
+\subsubsection{最优参数的选择}
+
+本题需要找出在 (1) $c$ 为常数且 $c\in[0, \num{100000}]\,(\mathrm{N}\cdot\mathrm{s}/\mathrm{m})$ 和 (2) $c=c_r|v_1-v_2|^p$，其中 $c_r\in[0, \num{100000}]\,(\mathrm{N}\cdot(\mathrm{s}/\mathrm{m})^{1/p})$ 和 $p\in[0, 1]$ 为常数的两种情况下，平均输出功率 $\bar{P}$ 的最大值和相应的常数系数。
