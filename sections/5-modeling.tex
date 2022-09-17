@@ -115,7 +115,40 @@
 我们使用计算机对这个二元二阶线性初值问题进行数值求解。
 对于题设的两种情况，我们均设定求解起点和终点为 0\,s 和 180\,s，以 0.2\,s 为间隔进行求解，得到在这 180\,s（即前 40 个周期）中，振子和浮子各自的位移和速度，如图所示。
 
-完整的求解结果，我们已经存放在 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 文件中。其中，10\,s，20\,s，40\,s，60\,s，100\,s 时的数据如表所示。
+完整的求解结果，我们已经存放在 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 文件中。其中，10\,s，20\,s，40\,s，60\,s，100\,s 时的数据如表 \ref{answer-1-1} 和表 \ref{answer-1-2} 所示。
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ccccccc}
+        \toprule
+        & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
+        \midrule
+        \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+        & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+        \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+        & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{当 $c$ 为定值时，求解得到几个特殊时刻的浮子、振子位移和速度数据}
+    \label{answer-1-1}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ccccccc}
+        \toprule
+        & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
+        \midrule
+        \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+        & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+        \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
+        & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{当 $c$ 与相对速度相关时，求解得到几个特殊时刻的浮子、振子位移和速度数据}
+    \label{answer-1-2}
+\end{table}
+
+
 
 \subsection{问题二}
 
@@ -132,8 +165,54 @@
 \begin{equation}
     \bar{P}=\dfrac{1}{T}\int\limits_0^TP(t)\dif t\approx\dfrac{1}{T}\sum_{i=1}^n\dfrac{P(t_i)+P(t_{i+1})}{2}\Delta t
 \end{equation}
-结合问题一计算得到的离散速度、位移与时间的关系，我们容易算出给定条件下的 PTO 输出功率。
+结合问题一的方法计算离散的速度、位移与时间的关系，我们容易算出给定条件下的 PTO 输出功率。
 
 \subsubsection{最优参数的选择}
 
-本题需要找出在 (1) $c$ 为常数且 $c\in[0, \num{100000}]\,(\mathrm{N}\cdot\mathrm{s}/\mathrm{m})$ 和 (2) $c=c_r|v_1-v_2|^p$，其中 $c_r\in[0, \num{100000}]\,(\mathrm{N}\cdot(\mathrm{s}/\mathrm{m})^{1/p})$ 和 $p\in[0, 1]$ 为常数的两种情况下，平均输出功率 $\bar{P}$ 的最大值和相应的常数系数。
+本题需要找出在 (1) $c$ 为常数且 $c\in[0, \N{100000}]\,(\mathrm{N}\cdot\mathrm{s}/\mathrm{m})$ 和 (2) $c=C|v_1-v_2|^p$，其中 $C\in[0, \N{100000}]\,(\mathrm{N}\cdot(\mathrm{s}/\mathrm{m})^{p+1})$ 和 $p\in[0, 1]$ 为常数的两种情况下，平均输出功率 $\bar{P}$ 的最大值和相应的常数系数。
+本问题使用的与问题一所不同的量如表 \ref{consts-2} 所示。
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        符号 & 量的值 \\
+        \midrule
+        $F$ & $f\cos(\omega t)$，其中 $f=\N{4890}\,\mathrm{N}$，$\omega=\N{2.2143}\,\mathrm{s}^{-1}$ \\
+        $c_0$ & $\N{167.8395}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+        $m_0$ & $\N{1165.992}\,\mathrm{kg}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{问题二与问题一不同的量}
+    \label{consts-2}
+\end{table}
+
+以上面的条件设计程序输入计算机，我们很容易得到对于情况 1（$c$ 为定值），PTO 系统输出功率与阻尼系数 $c$ 的关系如图所示。
+当输出功率最大时，输出功率、阻尼系数如表 \ref{answer-2-1} 所示。
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        输出功率/W & 阻尼系数/$\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+        \midrule
+        1 & 2 \\
+        \bottomrule
+    \end{tabular}
+    \caption{输出功率的最大值，以及此时的阻尼系数}
+    \label{answer-2-1}
+\end{table}
+
+而对于情况 2（$c$ 与相对速度有关），我们同样可以求出 PTO 系统输出功率与阻尼比例系数 $C$、幂指数 $p$ 的关系如图所示。
+当输出功率最大时，对应的 $C$ 和 $p$ 的值如表 \ref{answer-2-2} 所示。
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        输出功率/W & 比例系数/$\mathrm{N}\cdot(\mathrm{s}/\mathrm{m})^{p+1}$ & 幂指数 \\
+        \midrule
+        1 & 2 & 3 \\
+        \bottomrule
+    \end{tabular}
+    \caption{输出功率的最大值，以及此时的阻尼系数}
+    \label{answer-2-1}
+\end{table}
