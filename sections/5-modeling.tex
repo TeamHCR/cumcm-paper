@@ -86,7 +86,7 @@
         \midrule
         $M$ & \N{4866}\,kg \\
         $m$ & \N{2433}\,kg \\
-        $k$ & \N{250000}\,$\mathrm{N}\cdot\mathrm{m}$ \\
+        $k$ & \N{250000}\,$\mathrm{N}/\mathrm{m}$ \\
         $\rho$ & \N{1025}\,$\mathrm{kg}/\mathrm{m}^3$ \\
         $g$ & \N{9.8}\,$\mathrm{m}/\mathrm{s}^2$ \\
         $A$ & $\uppi\,\mathrm{m}^2$ \\
@@ -279,13 +279,13 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 同时，在竖直方向，浮子受到波浪激励力 $F$、自身重力 $Mg$、PTO 反作用力 $F_\text{PTO}$ 的竖直分力、杆支持力的反作用力的水平竖直分力 $F_{ABy}$，以及浮力（静水恢复力） $F_\text{浮}$、附加惯性力 $m_0\dfrac{\dif^2z_G}{\dif t^2}$、兴波阻尼力 $c_0\dfrac{\dif z_G}{\dif t}$。
 因此有
 \begin{equation}
-    M\cdot\dfrac{\dif^2 z_G}{\dif t^2}=F+F_\text{浮}-Mg-F_\text{PTO}\cos(\theta+\gamma)-F_{ABy}-m_0\dfrac{\dif^2z_G}{\dif t^2}-c_0\dfrac{\dif z_G}{\dif t}
+    M\cdot\dfrac{\dif^2 z_G}{\dif t^2}=F+F_\text{浮}-Mg-F_\text{PTO}\cos(\theta+\gamma)-F_{ABz}-m_0\dfrac{\dif^2z_G}{\dif t^2}-c_0\dfrac{\dif z_G}{\dif t}
 \end{equation}
 
 最后，我们分析浮子的转动过程。
-记波浪激励力矩为 $M$，浮子绕过其质心的轴的转动惯量为 $I_A$，附加转动惯量为 $I_0$，兴波阻尼力矩系数为 $c_\text{rot}$，静水恢复力矩系数为 $M_\text{rec}$，有
+记波浪激励力矩为 $M$，浮子绕过其质心的轴的转动惯量为 $I_A$，附加转动惯量为 $I_0$，兴波阻尼力矩系数为 $c_\text{r0}$，静水恢复力矩系数为 $M_\text{rec}$，有
 \begin{equation}
-    I_A\dfrac{\dif^2\theta}{\dif t^2}=M-M_\text{PTO}-F_{ABx}\cdot d\cos\theta-F_{ABz}\cdot d\sin\theta-I_0\dfrac{\dif^2\theta}{\dif t^2}-c_\text{rot}\dfrac{\dif\theta}{\dif t}-M_\text{rec}\theta \label{problem-3-eq6}
+    I_A\dfrac{\dif^2\theta}{\dif t^2}=M-M_\text{PTO}-F_{ABx}\cdot d\cos\theta-F_{ABz}\cdot d\sin\theta-I_0\dfrac{\dif^2\theta}{\dif t^2}-c_\text{r0}\dfrac{\dif\theta}{\dif t}-M_\text{rec}\theta \label{problem-3-eq6}
 \end{equation}
 
 式 \eqref{problem-3-eq1}—\eqref{problem-3-eq6} 构成一组微分方程组。
@@ -314,3 +314,45 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 考虑浮子的质心 $G$。
 显然浮子是由一个无底圆锥面、一个圆柱侧面和一个圆面构成的组合体，对此组合体的各个部分求质心，我们容易求得此组合体的质心距离底面长度为 $d_G=\N{1.45189}\,\mathrm{m}$。
 再由 \eqref{floating-relationship}，可以计算出
+
+\subsubsection{数值求解}
+
+对于问题三，我们使用的常量如表 \ref{consts-3} 所示。
+
+\begin{table}[htbp]
+    \centering
+        \begin{tabular}{cc}
+            \toprule
+            符号 & 常数的值 \\
+            \midrule
+            $M$ & \N{4866}\,kg \\
+            $m$ & \N{2433}\,kg \\
+            $\rho$ & \N{1025}\,$\mathrm{kg}/\mathrm{m}^3$ \\
+            $g$ & \N{9.8}\,$\mathrm{m}/\mathrm{s}^2$ \\
+            $A$ & $\uppi\,\mathrm{m}^2$ \\
+            $k$ & \N{8000}\,$\mathrm{N}/\mathrm{m}$ \\
+            $c$ & $\N{10000}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+            $k_\text{rot}$ & $\N{250000}\,\mathrm{N}\cdot\mathrm{m}$ \\
+            $c_\text{rot}$ & $\N{1000}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$ \\
+            $l_0$ & $\N{0.5}\,\mathrm{m}$ \\
+            $M_\text{rec}$ & $\N{8890.7}\,\mathrm{N}\cdot\mathrm{m}$ \\
+            $m_0$ & $\N{1028.876}\,\mathrm{kg}$ \\
+            $I_0$ & $\N{7001.914}\,\mathrm{kg}\cdot\mathrm{m}^2$ \\
+            $c_0$ & $\N{683.4558}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+            $c_\text{r0}$ & $\N{655.3383}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$ \\
+            \bottomrule
+        \end{tabular}
+        \caption{问题三适用的部分常量}
+        \label{consts-3}
+\end{table}
+
+此外，我们还有
+\begin{equation*}
+    \begin{aligned}
+        & F=f\cos(\omega t) \\
+        & M=L\cos(\omega t) \\
+        & f=\N{3640}\,\mathrm{N} \\
+        & L=\N{1690}\,\mathrm{N}\cdot\mathrm{m} \\
+        & \omega=\N{1.7152}\,\mathrm{s}^{-1} \\
+    \end{aligned}
+\end{equation*}
