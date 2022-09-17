@@ -9,3 +9,4 @@ main.pdf
 *.bcf
 *.synctex.gz
 *.run.xml
+.DS_Store
