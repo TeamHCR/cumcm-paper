@@ -307,7 +307,7 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 
 考虑几何关系，有
 \begin{align}
-    x_P&=d\sin\theta-l\sin(\theta+\gamma) \\
+    x_P&=x_G+d\sin\theta-l\sin(\theta+\gamma) \\
     z_P&=z_G-d\cos\theta+l\cos(\theta+\gamma)
 \end{align}
 
@@ -373,12 +373,10 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 设振子圆柱体厚度为 $h$，半径为 $r$，有
 \begin{equation}
         I_B(l) =\dfrac{(4h^2-12h(h+l)+3r^2+12(h+l)^2)m}{12} 
+        \label{last-eq-3}
 \end{equation}    
 
-
-
-
-
+联立式 \eqref{problem-3-eq1}—\eqref{last-eq-3}，可以得到一组有六个未知函数的微分方程。
 
 \subsubsection{数值求解}
 
@@ -424,12 +422,8 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
     \right.
 \end{equation*}    
 
-将以上方程输入计算机中求解，可以得到所求的五个时刻下浮子和振子的位移、速度、角位移、角速度。
-完整的求解结果，我们已经存放在 result3.xlsx文件中．其
-中，10 s，20 s，40 s，60 s，100 s 时的数据如表 和表 所示。
-
-
-
+将以上方程输入计算机中求解，可以得到各个时刻下浮子和振子的位移、速度、角位移、角速度，如图至图所示。
+完整的求解结果，我们已经存放在 \verb|result3.xlsx|文件中。其中，10 s，20 s，40 s，60 s，100 s 时的数据如表 和表 所示。
 
 \subsection{问题四}
 
