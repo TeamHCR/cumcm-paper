@@ -8,7 +8,7 @@
 以海平面为参考系。
 
 当装置在水中静止时，对质量为 $m$ 的振子进行受力分析，则其受到的重力和受到弹簧弹力合力为零。
-记以铅直向上为正方向，重力加速度为 $g$，记此时振子位移为 0，记此时弹簧压缩量为 $x_0$，弹簧的刚度为 $k$，则有 
+以铅直向上为正方向，重力加速度为 $g$，记此时振子位移为 0，记此时弹簧压缩量为 $x_0$，弹簧的刚度为 $k$，则有 
 \begin{equation}
     kx_0-mg=0 
     \label{oscilator}
@@ -53,7 +53,7 @@
     \label{floating}
 \end{equation}
 
-联立 \eqref{oscilator}—\eqref{floating} 式，我们可以消去 $mg$、$Mg$、$F_\text{浮}$ 和 $x_0$ 几项，得到
+联立 \eqref{oscilator}—\eqref{floating} 式，我们可以消去 $mg$、$Mg$、$F_\text{浮}$ 和 $x_0$ 几项，得到\cite{zhengmingyue2017power}
 \begin{equation}
     \left\{
     \begin{aligned}
@@ -114,7 +114,22 @@
 \end{equation}
 
 我们使用计算机对这个二元二阶线性初值问题进行数值求解。
-对于题设的两种情况，我们均设定求解起点和终点为 0\,s 和 180\,s，以 0.2\,s 为间隔进行求解，得到在这 180\,s（即前 40 个周期）中，振子和浮子各自的位移和速度，如图所示。
+对于题设的两种情况，我们均设定求解起点和终点为 0\,s 和 180\,s，以 0.2\,s 为间隔进行求解，得到在这 180\,s（即前 40 个周期）中，振子和浮子各自的位移和速度。
+为了直观地显示它们的运动，我们还绘制出一段时间内浮子和振子的位移随时间的关系图。如图 \ref{mma-1-1} 和图 \ref{mma-1-2} 所示。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=12cm]{fig/1.pdf}
+    \caption{当 $c$ 为定值时，在 100\,s 时间范围内，浮子和振子的位置变化。图上 \texttt{x1} 和 \texttt{x2} 即为浮子和振子的位移}
+    \label{mma-1-1}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=12cm]{fig/3.pdf}
+    \caption{当 $c$ 与相对速度相关时，在 100\,s 时间范围内，浮子和振子的位置变化。图上 \texttt{x1} 和 \texttt{x2} 即为浮子和振子的位移}
+    \label{mma-1-2}
+\end{figure}
+
+
 
 完整的求解结果，我们已经存放在 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 文件中。其中，10\,s，20\,s，40\,s，60\,s，100\,s 时的数据如表 \ref{answer-1-1} 和表 \ref{answer-1-2} 所示。
 \begin{table}[htbp]
@@ -191,7 +206,58 @@
 对于传统的连续解析函数的极（最）值优化问题，我们有诸如爬山法、梯度下降法、Adams 算法等多种方法。
 然而，这些方法都依赖函数的可导性质。
 在问题一中，我们得到的是离散的点集，显然传统的函数优化方法不再适用。
-为了高效地找到其中的最优化值，我们使用一种类似「模拟退火」的方法进行函数优化。
+为了高效地找到其中的最优化值，我们主要考虑了两种方法：模拟退火算法以及经过随机化修饰的爬山法。
+模拟退火算法在求解这类只能求得离散数值解的函数最值问题方面有很大的优势，其能够比较全局地考虑整个函数值域上的最值，且能够较快地解决最值问题。
+
+但是，在本文的问题情景中，使用模拟退火算法进行一次求函数值的操作需要的时间接近 2 秒，且并不能在足够少的求值区间内得到函数的极值。
+尽管已经尽可能对模拟退火算法进行并行优化，如多线程、多进程、多服务器运行，其速度仍然达不到求解问题的需求。
+
+相比之下，爬山法虽然只能通过周边函数值的启发，提高搜索的效率，但是其不是全面搜索，有遗漏函数极值的可能。
+
+观察本问题情景中所求函数经过计算机插值之后生成的图像，可以发现其在大趋势上的变化很简单，这给了爬山法应用的条件；但是放大其图像细节则能够发现许多函数值的“山峰”（如图 \ref{mountains}），这些“山峰”很有可能阻挡爬山法向函数极值前进的步伐，但是模拟退火算法因其模拟的物理退火性质，能够随机地“越过”这些“山峰”，从而能够更加全面地发现函数的极值。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6cm]{fig/8.pdf}
+    \caption{使用 Wolfram Engine 导出的平均功率函数值，可以看见数值上的「山峰」}
+    \label{mountains}
+\end{figure}
+
+由模拟退火算法、爬山法和随机梯度下降算法等算法的启发，本文综合运用了以上多种算法，将由周围函数值启发前进方向、并行运行优化、变化的“温度”和随机跃进等思想结合起来，较好地完成了本文情景下的任务，不仅性能较为优异，其计算时间也大大缩短。
+算法的伪代码如下：
+
+\begin{lstlisting}[language=Python]
+def generate_new():
+    return 根据温度高低生成不同随机范围的位置
+
+def run_random():
+    # 降温到目标温度之前
+    while T > T_finish:
+        f_now = map(func(p), p in positions)
+        next_positions = generate_new()
+        for i in range(len(next_positions)):
+            f = f_now[i]
+            f_new = func(p)
+            if metrospolis(f, f_new):
+                positions[i] = next_positions[i]
+        # 不断降温冷却
+        T *= alpha
+    # 返回点集中最好的
+    return best(positions)
+
+def run_climb_random():
+    # 记录当前最值
+    last = 0
+    while T > T_finish:
+        next_positions = generate_new()
+        for p in next_positions:
+            f = func(p)
+            if f better than last:
+                last = f; position = p;
+        # 不断降温冷却
+        T *= alpha
+    return position
+\end{lstlisting}
 
 
 我们将上面的过程编写为 Python 程序并运行，最终运行得到的优化结果如表 \ref{answer-2-1} 和 \ref{answer-2-2} 所示。
@@ -222,8 +288,21 @@
 \end{table}
 
 同时，为了直观验证结果的合理性，我们也使用 Wolfram Engine 内置的点集绘图功能，绘制了平均输出功率 $P$ 与阻尼系数、比例系数、幂指数等的关系图。
-对于情况 1，关系如图 \ref{result-2-1} 所示，而对于情况 2，关系如图 \ref{result-2-2} 所示。
+如图 \ref{result-2-fig} 所示。
 不难发现，我们使用算法得到的优化解，与图上所显示出的走向趋势一致。
+
+    \begin{figure}[htbp]
+        \centering
+      \subfigure[平均输出功率与阻尼系数的关系]{
+        \includegraphics[width=5cm]{fig/5.pdf}
+      }
+      \qquad
+      \subfigure[平均输出功率与比例系数和幂指数的关系]{
+        \includegraphics[width=5cm]{fig/7.pdf}
+      }
+      \caption{平均输出功率的曲线（面）图}
+      \label{result-2-fig}
+    \end{figure}
 
 \subsection{问题三}
 
@@ -242,6 +321,7 @@
 
 我们以整个装置静止直立在水面上时，浮子的质心为原点，以来流指向方向为 $x$ 轴正方向，以铅直向上为 $z$ 轴正方向，建立空间直角坐标系 $O-xyz$。
 在装置运行的某一时刻 $t$，在 $xOz$ 投影面上装置的运行状态如图 \ref{status} 所示。
+我们通过分析 $x$ 和 $z$ 两个正交方向，即可确定装置的运动状态\cite{huangyifan2014analysis}。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=6cm]{fig/problem-3-1.pdf}
@@ -267,7 +347,7 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 
 考虑振子的转动，设其在弹簧长度为 $l$ 时的转动惯量为 $I_B(l)$。
 以逆时针为正方向。
-记绞接处旋转阻尼器产生的旋转力矩为 $M_\text{PTO}$，则可以列出如下的转动运动学方程
+记绞接处旋转阻尼器产生的旋转力矩为 $M_\text{PTO}$，则可以列出如下的转动运动学方程\cite{yuanfei2019mushroom}
 \begin{equation}
     I_B(l)\cdot\dfrac{\dif^2(\theta+\gamma)}{\dif t^2}=M_\text{PTO}-F_{AB}\cdot l
 \end{equation}
@@ -376,7 +456,7 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
     I_A=\N{8399.2}\,\mathrm{kg}\cdot\mathrm{m}^2
 \end{equation}
 
-另一方面，我们考虑振子绕转轴转动的转动惯量，有转轴绞接处到振子底部圆心的距离为 $l$。
+另一方面，我们考虑振子绕转轴转动的转动惯量，易知转轴绞接处到振子底部圆心的距离为 $l$。
 设振子圆柱体厚度为 $h$，半径为 $r$，有
 \begin{equation}
         I_B(l) =\dfrac{(4h^2-12h(h+l)+3r^2+12(h+l)^2)m}{12} 
@@ -400,7 +480,7 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
             $\rho$ & \N{1025}\,$\mathrm{kg}/\mathrm{m}^3$ \\
             $g$ & \N{9.8}\,$\mathrm{m}/\mathrm{s}^2$ \\
             $A$ & $\uppi\,\mathrm{m}^2$ \\
-            $k$ & \N{8000}\,$\mathrm{N}/\mathrm{m}$ \\
+            $k$ & \N{80000}\,$\mathrm{N}/\mathrm{m}$ \\
             $c$ & $\N{10000}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
             $k_\text{rot}$ & $\N{250000}\,\mathrm{N}\cdot\mathrm{m}$ \\
             $c_\text{rot}$ & $\N{1000}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$ \\
@@ -429,15 +509,35 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
     \right.
 \end{equation*}    
 
-将以上方程输入计算机中求解，可以得到各个时刻下浮子和振子的位移、速度、角位移、角速度，如图至图所示。
-完整的求解结果，我们已经存放在 \verb|result3.xlsx|文件中。
+将以上方程输入计算机中求解，可以得到各个时刻下浮子和振子的位移、速度、角位移、角速度，如图 \ref{problem-3-fig} 所示。
+完整的求解结果，我们已经存放在 \verb|result3.xlsx| 文件中。
 其中，10 s，20 s，40 s，60 s，100 s 时的数据如表 \ref{answer-3} 所示。
 浮子的速度、位移以海平面为参考系，以 $z$ 轴指向为正方向；振子的速度、位移以浮子为参考系，以中轴向上为正方向。
 所有角度以图 \ref{status} 中逆时针方向为正方向，浮子的角速度、角位移以海平面为参考系；振子则以浮子为参考系。
 
+\begin{figure}[htbp]
+    \centering
+    \subfigure[角速度]{
+        \includegraphics[width=6cm]{fig/9.pdf}
+    }
+    \qquad
+    \subfigure[角加速度]{
+        \includegraphics[width=6cm]{fig/10.pdf}
+    } \\
+    \subfigure[速度]{
+        \includegraphics[width=6cm]{fig/11.pdf}
+    }
+    \qquad
+    \subfigure[加速度]{
+        \includegraphics[width=6cm]{fig/new.pdf}
+    }
+    \caption{问题三的结果示意图}
+    \label{problem-3-fig}
+    
+\end{figure}
+
 \begin{table}[htbp]
     \centering
-    \scriptsize
     \begin{tabular}{ccccccc}
         \toprule
         & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s\\
@@ -447,9 +547,9 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
         & 位移/$\mathrm{m}$ & \N{-0.06645} & \N{0.13674} & \N{-0.05800} & \N{0.28778} & \N{0.30520}  \\
         & 角位移/rad & \N{0.22206} & \N{0.82083} & \N{0.38582} & \N{0.92471} & \N{0.88672} \\  
         \multirow{4}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & \N{-0.08109} & \N{0.10798} & \N{0.00638} & \N{0.07530} & \N{ 0.11954} \\ 
-        & 角速度/$\mathrm{s}^{-1}$ & \N{-0.00610} & \N{0.01502} & \N{0.00135} & \N{0.012130} & \N{0.018767} \\
+        & 角速度/$\mathrm{s}^{-1}$ & \N{-0.00610} & \N{0.01502} & \N{0.00135} & \N{0.01213} & \N{0.01877} \\
         & 位移/$\mathrm{m}$ & \N{0.20973} & \N{0.28602} & \N{0.20124} & \N{0.32874} & \N{0.30858} \\
-         & 角位移/rad & \N{0.00334} & \N{0.02090} & \N{0.006036183} & \N{0.02598} & \N{0.02289} \\  
+         & 角位移/rad & \N{0.00334} & \N{0.02090} & \N{0.00604} & \N{0.02598} & \N{0.02289} \\  
         \bottomrule
     \end{tabular}
     \caption{问题三中 5 个特殊时刻的位移、速度和角位移、角速度}
@@ -459,9 +559,46 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 
 \subsection{问题四}
 
-\subsubsection{输出功率的推导}
+有了问题二和问题三的基础，解决问题四自然不是难事。
+具体来说，我们采用问题二的处理方法，利用问题三已经计算出来的各个时刻的浮子、振子状态，来计算直线阻尼器和旋转阻尼器上的瞬时功率并进行积分，求得平均功率。
 
-问题四在问题二的基础上，增加了绕轴旋转的纵摇运动。
-我们可以利用问题三已经计算出来的各个时刻的浮子、振子状态，来计算一系列瞬时功率并进行积分，即可求得平均功率。
+与问题三相比，问题四不同取值的常量如图 \ref{consts-4} 所示。
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        符号 & 常数的值 \\
+        \midrule
+        $\omega$ & $\N{1.9806}\,\mathrm{s}^{-1}$ \\
+        $m_0$ & $\N{1091.099}\,\mathrm{kg} $ \\
+        $I_0$ & $\N{7142.493}\,\mathrm{kg}\cdot\mathrm{m}^2$ \\
+        $c_0$ & $\N{528.5018}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+        $c_\text{r0}$ & $\N{1655.909}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$ \\
+        $f$ & $\N{1760}\,\mathrm{N}$ \\
+        $L$ & $\N{2140}\,\mathrm{N}\cdot\mathrm{m}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{问题四中与问题三不同的常量}
+    \label{consts-4}
+\end{table}
+
+与问题二一致，我们编写 Python 程序，使用前文所言的「类」模拟退火算法，对平均功率进行优化。
+最终优化的结果如表 \ref{problem-4-answer} 所示。
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        项目 & 值 \\
+        \midrule
+        直线阻尼器阻尼系数 & $\N{44493.76335}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+        旋转阻尼器阻尼系数 & $\N{29418.73019}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$ \\
+        最大功率 & $\N{167.89034}\,\mathrm{W}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{问题四的优化结果}
+    \label{problem-4-answer}
+\end{table}
 
 
