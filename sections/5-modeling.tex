@@ -290,7 +290,7 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 其中的未知函数是 $\theta$、$\gamma$、$l$、$z_G$ 和 $F_{AB}$，它们都是时间 $t$ 的函数。
 下面，我们尝试确定上述方程中的无关系数，从而使得微分方程可以被解算。
 
-\subsubsection{系数的求值}
+\subsubsection{参数的求值}
 
 考虑弹簧和阻尼器构成的 PTO。
 容易知道
@@ -312,27 +312,52 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 考虑浮子的质心 $G$。
 显然浮子是由一个无底圆锥面、一个圆柱侧面和一个圆面构成的组合体，对此组合体的各个部分求质心，我们容易求得此组合体的质心距离圆锥部分顶点的长度为 $d_G\approx\N{2.20792}\,\mathrm{m}$。
 故 $d=d_G-\N{0.8}\,\mathrm{m}=\N{1.40792}\,\mathrm{m}$。
-再由 \eqref{floating-relationship}，可以计算出浮子处于平衡位置时浮子排出海水的体积 $V_\text{排}\approx\N{7.12098}\,\mathrm{m}^3$。
-考虑几何关系可知，圆柱体在水中沿某一固定中轴线做摆动运动时，
-其排出水的体积不随其母线与与中轴线夹角的改变而发生变化。
-因此我们可以求得当圆柱体的重心沿固定中轴线移动到位置ZG'时，其排开水的体积为
 
-
-考虑振子绕转轴转动的转动惯量，有转轴绞接处到振子底部圆心的距离为 $l$。
-设振子圆柱体厚度为 $h$，半径为 $r$，有
+考虑浮子绕重心做纵摇运动的转动惯量，易知该浮子可以看成是由一个无底圆锥面、一个圆柱侧面和一个圆面的组合体。
+容易知道
+\begin{equation}
+    I_A=I_\text{锥}+I_\text{柱}+I_\text{圆}
+\end{equation}
+我们先考虑一个理想均匀细圆环绕一平行于其直径的转轴旋转时的转动惯量。
+记圆环半径为 $R$，转轴到圆环所在平面距离为 $l$。
+取圆环上 $\dif\theta$ 角对应的一小段，其长度为 $R\dif\theta$。
+若圆环线密度为 $\lambda$，则这段圆环的转动惯量
+\begin{equation}
+    \dif I=\lambda\cdot R\dif\theta(l^2+R^2\cos^2\theta)
+\end{equation}
+所以对整个环有
+\begin{equation}
+    I_\text{ring}=\int\limits_0^{2\uppi}\lambda R\dif\theta(l^2+R^2\cos^2\theta)
+\end{equation}
+圆锥面、圆柱面和圆盘都可以分解为圆环在特定方向上的积分。
+对圆锥，记半顶角大小为 $\delta$，有
 \begin{equation}
     \begin{aligned}
-        I_B(l) &= \iiint\limits_Vr^2\dif{m} \\
-        &=\dfrac{r^2(4h^4-12h^3(h+l)+h^2(3r^2+12(h+l)^2))\uppi}{12\sqrt{h^2}}
+        I_\text{锥} &= \int\limits_0^{h_\text{锥}}I_\text{ring}\dif p \\
+        &=\int\limits_0^{h_\text{锥}}\dfrac{1}{\cos\delta}\dif p\int\limits_0^{2\uppi}\rho p\tan\delta((\d_G-p)^2+(p\tan\delta)^2\cos^2\theta)\dif\theta
     \end{aligned}
 \end{equation}
+同理对圆柱有
+\begin{equation}
+        I_\text{柱} = \int\limits_{h_\text{柱底}}^{h_\text{柱顶}}\dif p\int\limits_{0}^{2\uppi}\rho R(p^2+R^2\cos^2\theta)\dif\theta
+\end{equation}
+对圆面有
+\begin{equation}
+    I_\text{圆} = \int\limits_0^R\dif p\int\limits_0^{2\uppi}\rho p(l^2+p^2\cos^2\theta)\dif\theta
+\end{equation}
+我们代入相应的尺寸数据，得到
+\begin{equation}
+    I_A=\N{8399.2}\,\mathrm{kg}\cdot\mathrm{m}^2
+\end{equation}
+
+另一方面，我们考虑振子绕转轴转动的转动惯量，有转轴绞接处到振子底部圆心的距离为 $l$。
+设振子圆柱体厚度为 $h$，半径为 $r$，有
+\begin{equation}
+        I_B(l) =\dfrac{(4h^2-12h(h+l)+3r^2+12(h+l)^2)m}{12} 
+\end{equation}    
 
 
 
-
-考虑浮子绕海水中绕重心所在中轴线做纵摇运动的转动惯量，易知该浮子可以看成是由一个无底圆锥面、一个圆柱侧面和一个圆面的组合体。
-分三段对转动惯量进行积分求解，圆锥面可以看成是由若干个半径不同的无厚度圆环组成的曲面，对若干个圆环的转动惯量进行积分，即可求得圆锥面的转动惯量。
-圆柱面可以看成是由若干个半径相同的无厚度圆环组成的曲面，底面可以看成是若干个半径组成的圆面，同样对二者进行积分，将三个积分结果相加，即可求得浮子的转动惯量为
 
 
 
