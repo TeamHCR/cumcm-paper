@@ -183,7 +183,7 @@
         $m_0$ & $\N{1165.992}\,\mathrm{kg}$ \\
         \bottomrule
     \end{tabular}
-    \caption{问题二与问题一不同的量}
+    \caption{问题二使用的与问题一不同的量}
     \label{consts-2}
 \end{table}
 
@@ -230,12 +230,11 @@
 为了便于问题的分析，我们拟定下面的前提：
 \begin{enumerate}
     \item 浮子的转动是绕其质心进行的定轴转动，振子的转动中心则是中轴与中轴底座绞接处。中轴底座、转轴等结构的厚度为零。
-    \item 整个装置在水平方向没有速度，只做「垂荡」和「纵摇」运动。
     \item 题目中所提供的波浪激励力矩 $L\cos(\omega t)$ 可视为力偶矩，它不为浮子的平动提供加速度。
 \end{enumerate}
 
 我们以整个装置静止直立在水面上时，浮子的质心为原点，以来流指向方向为 $x$ 轴正方向，以铅直向上为 $z$ 轴正方向，建立空间直角坐标系 $O-xyz$。
-在装置运行的某一时刻，在 $xOz$ 投影面上装置的运行状态如图 \ref{status} 所示。
+在装置运行的某一时刻 $t$，在 $xOz$ 投影面上装置的运行状态如图 \ref{status} 所示。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=6cm]{fig/problem-3-1.pdf}
@@ -244,14 +243,13 @@
 \end{figure}
 
 在图中，$G$ 是浮子的质心。
-由前文的前提我们可以知道，装置运行时，浮子不产生 $x$ 方向的水平位移，故 $G$ 在整个运动过程中都在 $z$ 轴上。
-另一方面，浮子是一个对称旋转体，故 $G$ 亦始终位于浮子的旋转轴（图中的虚线）上。
+显然，浮子是一个对称旋转体，故 $G$ 始终位于浮子的旋转轴（图中的虚线）上。
 $A$ 点是绞链所在的点，由题目条件知道绞接处也位于浮子的旋转轴上。
 $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构成的结构。
 考虑装置中所有的转动，我们记 $\theta$ 为浮子的纵摇角，记 $\gamma$ 为振子相对于浮子的纵摇角，角度以图上视角逆时针为正值。
 同时，为了便于分析，我们记 $l$ 为弹簧在此时的长度，记 $d$ 为线段 $AG$ 的长度，即转轴绞接处与浮子质心的距离。
 
-方便起见，我们设此时 $G$ 点的坐标为 $(0, 0, z_G)$，设此时 $P$ 点的坐标为 $(x_P, 0, z_P)$。
+方便起见，我们设此时 $G$ 点的坐标为 $(x_G, 0, z_G)$，设此时 $P$ 点的坐标为 $(x_P, 0, z_P)$。
 对振子进行受力分析。
 振子在水平和竖直方向产生的加速度分别为 $\dfrac{\dif^2 x_P}{\dif t^2}$ 和 $\dfrac{\dif^2 z_P}{\dif t^2}$，而振子受到的外力有 PTO 装置（弹簧和阻尼器）的推拉力 $F_\text{PTO}$、振子自身重力 $mg$ 以及其受到中轴（视为轻杆）的支持力 $F_{AB}$。
 在 $x$ 和 $z$ 方向分别列出振子的运动学方程，有
@@ -274,7 +272,11 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 % \begin{equation}
 %     F_\text{PTO}\sin(\theta+\gamma)-F_{ABx}=0
 % \end{equation}
-在竖直方向，浮子受到波浪激励力 $F$、自身重力 $Mg$、PTO 反作用力 $F_\text{PTO}$ 的竖直分力、杆支持力的反作用力 $F_{AB}$ 的水平竖直分力，以及浮力（静水恢复力） $F_\text{浮}$、附加惯性力 $m_0\dfrac{\dif^2z_G}{\dif t^2}$、兴波阻尼力 $c_0\dfrac{\dif z_G}{\dif t}$。
+在水平方向，浮子只受到 $F_\text{PTO}$ 和 $F_{AB}$ 的水平分力，故有
+\begin{equation}
+    M\cdot\dfrac{\dif^2 x_G}{\dif t^2}= F_\text{PTO}\sin(\theta+\gamma)-F_{AB}\cos(\theta+\gamma)
+\end{equation}
+而在竖直方向，浮子受到波浪激励力 $F$、自身重力 $Mg$、PTO 反作用力 $F_\text{PTO}$ 的竖直分力、杆支持力的反作用力 $F_{AB}$ 的水平竖直分力，以及浮力（静水恢复力） $F_\text{浮}$、附加惯性力 $m_0\dfrac{\dif^2z_G}{\dif t^2}$、兴波阻尼力 $c_0\dfrac{\dif z_G}{\dif t}$。
 因此有
 \begin{equation}
     M\cdot\dfrac{\dif^2 z_G}{\dif t^2}=F+F_\text{浮}-Mg-F_\text{PTO}\cos(\theta+\gamma)-F_{AB}\sin(\theta+\gamma)-m_0\dfrac{\dif^2z_G}{\dif t^2}-c_0\dfrac{\dif z_G}{\dif t}
@@ -287,8 +289,8 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 \end{equation}
 
 式 \eqref{problem-3-eq1}—\eqref{problem-3-eq5} 构成一组微分方程组。
-其中的未知函数是 $\theta$、$\gamma$、$l$、$z_G$ 和 $F_{AB}$，它们都是时间 $t$ 的函数。
-下面，我们尝试确定上述方程中的无关系数，从而使得微分方程可以被解算。
+其中的未知函数是 $\theta$、$\gamma$、$l$、$z_G$、$x_G$ 和 $F_{AB}$，它们都是时间 $t$ 的函数。
+下面，我们尝试确定上述方程中的系数和常数，从而使得微分方程可以被解算。
 
 \subsubsection{参数的求值}
 
@@ -312,6 +314,23 @@ $P$ 点是振子质心所在的点，$AP$ 连线表示的就是 PTO 和中轴构
 考虑浮子的质心 $G$。
 显然浮子是由一个无底圆锥面、一个圆柱侧面和一个圆面构成的组合体，对此组合体的各个部分求质心，我们容易求得此组合体的质心距离圆锥部分顶点的长度为 $d_G\approx\N{2.20792}\,\mathrm{m}$。
 故 $d=d_G-\N{0.8}\,\mathrm{m}=\N{1.40792}\,\mathrm{m}$。
+
+考虑浮子在做摇荡运动时的的排水量变化。
+如图 \ref{floating-fig} 所示，设原先质心位置为 $G_0$，现在质心位置为 $G$，浮子角度为 $\theta$。
+为了计算当前浮子排水的体积，我们可以延长 $GG_0$ 和 $AG$ 到海平面，容易知道 $BG=\dfrac{d_G}{\cos\theta}$。
+因此 $AB=AG+GB$ 可以容易算出。
+另一方面，由对称性可知 $V_A=V_B$，因此排水体积即为 $B$ 点之下浮子的体积。
+代入数据得
+\begin{equation}
+    V_\text{排}=\N{5.2609}+\N{1.86007}\sec \theta-\uppi z_G\sec \theta
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=8cm]{fig/floating.pdf}
+    \caption{浮子排水量计算示意}
+    \label{floating-fig}
+\end{figure}
 
 考虑浮子绕重心做纵摇运动的转动惯量，易知该浮子可以看成是由一个无底圆锥面、一个圆柱侧面和一个圆面的组合体。
 容易知道
