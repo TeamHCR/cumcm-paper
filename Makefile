@@ -19,6 +19,10 @@ $(PDF): $(REQUIRE) FORCE
 once: $(REQUIRE) FORCE
 	$(LATEX) $(PAPER).tex
 
+twice: $(REQUIRE) FORCE
+	$(LATEX) $(NOPDF) $(PAPER).tex
+	$(LATEX) $(PAPER).tex
+
 clean: FORCE
 	rm -r $(TEMP)
 
