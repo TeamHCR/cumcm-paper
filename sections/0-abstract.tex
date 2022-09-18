@@ -1,55 +1,38 @@
 \section*{摘要}
 \addcontentsline{toc}{section}{摘要}
-随着化石矿物质能源的日益枯竭，新型能源如海洋波浪能已成为研究人员关注的焦点。
+随着化石矿物质能源的日益枯竭，有效地开发和利用新型能源已成为研究人员关注的焦点。
+波浪能是海洋蕴含的巨大能量中的一种，是海洋能中最主要的能源之一，近年来国内外都有许多关于波浪能的研究和应用。
+
 本文主要研究一种由浮子、振子等结构构成的波浪能装置，通过建立合理的数学模型，
 推算其浮子和振子在不同情况下的摇荡位移和速度，并确定该系统在考虑不同因素的情况下的最大输出功率及相应的最优阻尼系数。
 
-\textbf{对于问题一}，我们通过对装置进行受力分析，列出与浮子、振子的位移有关的微分方程组，数值求解得出题目中所求的各个时刻的浮子与振子的垂荡位移和速度。
-方程求解的结果已经存放到指定文件中。
-其中，两种不同情况下 5 个特定时刻的状态如表 \ref{answer-1} 和表 \ref{answer-2} 所示：
+\textbf{对于问题一}，我们通过对装置进行受力分析，列出与浮子、振子的位移 $x_1$、$x_2$ 有关的二阶微分方程组。
+这些微分方程实际上构成一个初值问题。
+对这个初值问题进行数值求解，就能得出各个时刻的浮子与振子的垂荡位移和速度。
+相应的结果已经存放到 \verb|result1-1.xlsx| 和 \verb|result1-2.xlsx| 文件中。
+此外，文中也给出了 5 个特定时刻的位移和速度值，详见文中的表 \ref{answer-1-1} 和表 \ref{answer-2-1}。
 
+\textbf{对于问题二}，我们通过公式 $P=Fv$ 计算每个时刻的瞬时功率，再将瞬时功率进行积分来求出一段时间内的总能量，进而计算出平均功率。
+由于此时目标函数并不是传统的连续可导函数，我们只能得到其离散的点集，无法使用传统的优化方法，因此我们使用了一种类「梯度下降」的方法对目标函数进行处理。
+我们得到的最大功率及对应的阻尼系数如表 \ref{answer-2} 所示。
 \begin{table}[htbp]
     \centering
-    \scriptsize
-    \begin{minipage}[t]{0.48\textwidth}
-        \centering
-        \begin{tabular}{ccccccc}
-            \toprule
-            & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
-            \midrule
-            \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
-            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
-            \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
-            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
-            \bottomrule
-        \end{tabular}
-    \caption{(1) 中 5 个时刻的位移和速度}
-    \label{answer-1}
-    \end{minipage}
-    \begin{minipage}[t]{0.48\textwidth}
-        \centering
-        \begin{tabular}{ccccccc}
-            \toprule
-            & & 10\,s & 20\,s & 40\,s & 60\,s & 100\,s \\
-            \midrule
-            \multirow{2}{*}{浮子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
-            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
-            \multirow{2}{*}{振子} & 速度/$\mathrm{m}\cdot\mathrm{s}^{-1}$ & 1 & 2 & 3 & 4 & 5 \\
-            & 位移/$\mathrm{m}$ & 1 & 2 & 3 & 4 & 5 \\
-            \bottomrule
-        \end{tabular}
-    \caption{(2) 中 5 个时刻的位移和速度}
+    \begin{tabular}{ccc}
+        \toprule
+        & 最大功率/W & 阻尼系数/$\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$ \\
+        \midrule
+        情况 1 & 1 & 2 \\
+        情况 2 & 3 & 4 \\
+        \bottomrule
+    \end{tabular}
+    \caption{问题二的优化结果}
     \label{answer-2}
-    \end{minipage}
 \end{table}
 
-\textbf{对于问题二}，
-我们通过计算瞬时功率并将瞬时功率进行积分，求出一段时间内的总发电量，进而计算出平均功率。
-我们将不同条件下的平均功率作为目标函数进行优化，得到最大输出功率及相应的最优阻尼系数，分别为 (1) 100\,W, 0.1 和 (2) 200\,W, 0.2。
-
-\textbf{对于问题三}，我们建立统一的直角坐标系，在坐标系中正交分析浮子和振子的受力和运动情况，列出微分方程并借助机器进行数值求解。
-在 5 个特殊时刻的浮子和振子的摇荡数据如表 \ref{answer-3} 所示。
-各速度的参考系请参见正文中的定义。
+\textbf{对于问题三}，我们建立了统一的直角坐标系，在坐标系中正交分析浮子和振子的受力和运动（包括平动和转动）情况，列出位移和角位移在水平和竖直两个方向上的微分方程，确定它们的初值，再借助机器进行数值求解。
+所要求的结果我们已存放在文件 \verb|result3.xlsx| 文件中。
+同时，在给定的 5 个特殊时刻浮子和振子的摇荡数据也在文中列出，请参见表 \ref{answer-3}。
+结果表中各速度的参考系和正方向也请参见正文中的定义。
 
 \begin{table}[htbp]
     \centering
@@ -68,7 +51,8 @@
     \label{answer-3}
 \end{table}
 
-\textbf{对于问题四}，我们采用和问题二相类似的方法，通过分组优化加快寻找最优解的速度，求得最大输出功率为 \N{12345}\,W，对应阻尼系数 $c=\N{1234}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$，旋转阻尼系数 $c_\text{rot}=\N{1234}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$。
+\textbf{对于问题四}，我们采用和问题二相类似的方法，通过编写程序求离散函数的最优化问题。
+我们求得的最大输出功率为 \N{12345}\,W，对应阻尼系数 $c=\N{1234}\,\mathrm{N}\cdot\mathrm{s}/\mathrm{m}$，旋转阻尼系数 $c_\text{rot}=\N{1234}\,\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{s}$。
 
 \vfill
 
